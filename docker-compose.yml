@@ -7,12 +7,14 @@ services:
       - discovery.type=single-node
       - xpack.security.enabled=false
       - http.cors.enabled=true
-      - http.cors.allow-origin="http://127.0.0.1:5500"
+      - http.cors.allow-origin="*"
       - http.cors.allow-credentials=true
   nginx:
+    container_name: nginx
     image: nginx:latest
     ports:
       - 80:80
     volumes:
       - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
       - ./index.html:/var/www/html/index.html:ro
+      - ./app.js:/var/www/html/app.js:ro
